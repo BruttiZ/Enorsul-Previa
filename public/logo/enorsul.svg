@@ -1,0 +1,11 @@
+<svg width="295" height="145" viewBox="0 0 295 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="295" height="145" fill="white"/>
+  <path d="M291.3 9.3C303.7 30.7 246.7 66.8 164 89.9C81.3 113 4.2 114.4 -8.2 93C-20.6 71.6 36.4 35.5 119.1 12.4C201.8 -10.7 278.9 -12.1 291.3 9.3Z" stroke="#E30613" stroke-width="6"/>
+  <path d="M292.5 12.8C301.8 30.5 248.8 62.3 174.1 84C99.4 105.7 31.3 109.6 22 91.9C12.7 74.2 65.7 42.4 140.4 20.7C215.1 -1 283.2 -4.9 292.5 12.8Z" stroke="#E30613" stroke-width="1.8"/>
+  <path d="M2.8 78.5C25.4 52.7 65 36.9 118.4 25.4C77.7 42.9 46.5 63.9 35.8 84C25.5 103.5 46.3 113.2 91.8 112.7C40.7 124.3 2.4 120.8 -5.9 101.3C-8.9 94.3 -5.7 86.6 2.8 78.5Z" fill="#E30613"/>
+  <path d="M284.3 4.6C293 11.6 288.1 23.3 270.5 37.7C276.3 25.5 272.5 15.7 258.2 8.9C266.8 7 275.5 5.6 284.3 4.6Z" fill="#E30613"/>
+  <text x="31" y="70" fill="#E30613" font-family="Arial, Helvetica, sans-serif" font-size="57" font-weight="400" letter-spacing="-3">Enorsul</text>
+  <path d="M35 27V70H68" stroke="#E30613" stroke-width="4" stroke-linecap="square"/>
+  <path d="M227 50V79" stroke="#E30613" stroke-width="4" stroke-linecap="round"/>
+  <text x="68" y="91" fill="#174EA6" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Saneamento</text>
+</svg>

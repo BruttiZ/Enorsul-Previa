@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --enorsul-red: #e30613;
+  --enorsul-dark-red: #b1000c;
+  --enorsul-blue: #1b78b5;
+  --enorsul-light-blue: #4db4e7;
+  --background: #f7fafc;
+  --dark: #0b1726;
+  --gray: #5e6c84;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(77, 180, 231, 0.16), transparent 30%),
+    linear-gradient(180deg, #ffffff 0%, #f7fafc 42%, #eef6fb 100%);
+  color: var(--dark);
+  font-family: var(--font-inter), Arial, sans-serif;
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(77, 180, 231, 0.15), transparent 30%),
+    linear-gradient(180deg, #06111f 0%, #08192a 54%, #06111f 100%);
+  color: #edf7ff;
+}
+
+::selection {
+  background: var(--enorsul-red);
+  color: white;
+}
+
+.section-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(202, 213, 225, 0.72);
+  box-shadow: 0 20px 80px rgba(11, 23, 38, 0.08);
+  backdrop-filter: blur(20px);
+}
+
+.dark .glass {
+  background: rgba(8, 29, 49, 0.68);
+  border-color: rgba(77, 180, 231, 0.18);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.28);
+}
+
+.water-grid {
+  background-image:
+    linear-gradient(rgba(27, 120, 181, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 120, 181, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.clip-hero {
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+}
+
+@media (max-width: 768px) {
+  .clip-hero {
+    clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+  }
+}
