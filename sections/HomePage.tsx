@@ -119,6 +119,44 @@ const locations = [
   { uf: "AC", city: "Rio Branco", work: "Melhoria operacional, cadastro, pitometria e reducao de vazamentos" }
 ];
 
+const clientRegions = [
+  {
+    id: "norte",
+    name: "Norte",
+    states: ["ac", "ro", "rr"],
+    clients: ["CAERD", "CAER"],
+    description: "Operacoes regionais, melhoria operacional, cadastro tecnico, pitometria e reducao de vazamentos."
+  },
+  {
+    id: "nordeste",
+    name: "Nordeste",
+    states: ["pe", "al", "ma"],
+    clients: ["COMPESA", "CAGEPA", "IGUA", "CAGECE"],
+    description: "Contratos e historico em otimizacao de rede, perdas, concessoes e suporte regional."
+  },
+  {
+    id: "sudeste",
+    name: "Sudeste",
+    states: ["sp", "es"],
+    clients: ["SABESP", "Telefonica", "COPASA", "CESAN", "SAEMAS", "SAERP", "SAAE", "SEMAE", "AGUAS DO RIO", "Rio+ Saneamento"],
+    description: "Maior concentracao de operacoes, premios SABESP, automacao, TACE, obras, perdas e gestao comercial."
+  },
+  {
+    id: "sul",
+    name: "Sul",
+    states: ["rs"],
+    clients: ["CORSAN", "SANEPAR", "DMAE", "SAMAE"],
+    description: "Operacoes regionais e relacionamento com autarquias e companhias de saneamento."
+  },
+  {
+    id: "centro-oeste",
+    name: "Centro-Oeste",
+    states: ["ms"],
+    clients: ["SANESUL"],
+    description: "Historico em agua, esgoto, sistema comercial e desenvolvimento operacional."
+  }
+];
+
 type BrazilState = {
   id: string;
   name: string;
@@ -128,6 +166,7 @@ type BrazilState = {
 const brazilStates = brazil.locations as BrazilState[];
 const activeStateIds = new Set(locations.map((location) => location.uf.toLowerCase()));
 const stateById = new Map(locations.map((location) => [location.uf.toLowerCase(), location]));
+const regionByState = new Map(clientRegions.flatMap((region) => region.states.map((state) => [state, region])));
 
 const gallery = [
   ["ETA", "/images/banner-home-02.jpg"],
@@ -193,6 +232,7 @@ export default function HomePage() {
   const [dark, setDark] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeLocation, setActiveLocation] = useState(locations[0]);
+  const [activeRegion, setActiveRegion] = useState(clientRegions[2]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -474,78 +514,122 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="atuacao" className="bg-white py-20 dark:bg-slate-950">
-        <div className="section-shell grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
-          <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-[var(--enorsul-red)]">Atuacao Nacional</p>
-            <h2 className="text-3xl font-black tracking-normal md:text-5xl">Mapa operacional com presenca em regioes estrategicas.</h2>
-            <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300">
-              A Enorsul registra matriz, filiais, escritorios regionais e historico de concessoes em estados como SP, RS, PE, ES, RO, RR, AL, MS, MA e AC.
-            </p>
-            <div className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <div className="flex items-center gap-3">
-                <MapPin className="text-[var(--enorsul-red)]" />
-                <div>
-                  <p className="text-sm font-bold text-slate-500 dark:text-slate-400">Estado selecionado</p>
-                  <h3 className="text-2xl font-black">{activeLocation.uf} - {activeLocation.city}</h3>
-                </div>
-              </div>
-              <p className="mt-4 leading-7 text-slate-600 dark:text-slate-300">{activeLocation.work}</p>
-            </div>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {locations.map((location) => (
+      <section id="atuacao" className="relative overflow-hidden bg-white py-20 dark:bg-slate-950">
+        <div className="absolute inset-0 opacity-70 dark:opacity-20">
+          <div className="h-full w-full bg-[radial-gradient(circle_at_20%_20%,rgba(77,180,231,.26),transparent_28%),radial-gradient(circle_at_78%_76%,rgba(27,120,181,.18),transparent_24%)]" />
+        </div>
+        <div className="section-shell relative z-10">
+          <SectionTitle
+            eyebrow="Clientes e Atuacao"
+            title="Presenca nacional conectada a companhias, autarquias e operacoes regionais."
+            text="Uma leitura inspirada no mapa institucional atual da Enorsul, agora com estados reais, regioes interativas e marcas destacadas por area de atendimento."
+          />
+
+          <div className="grid gap-6 lg:grid-cols-[260px_1fr_300px]">
+            <div className="space-y-4">
+              {clientRegions.slice(0, 2).map((region) => (
                 <button
-                  key={location.uf}
-                  onClick={() => setActiveLocation(location)}
-                  className={`rounded-full border px-3 py-2 text-sm font-black transition ${
-                    activeLocation.uf === location.uf
-                      ? "border-[var(--enorsul-red)] bg-[var(--enorsul-red)] text-white"
-                      : "border-slate-200 bg-white text-slate-700 hover:border-[var(--enorsul-blue)] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                  key={region.id}
+                  onClick={() => setActiveRegion(region)}
+                  className={`w-full rounded-lg border p-4 text-left transition hover:-translate-y-0.5 ${
+                    activeRegion.id === region.id
+                      ? "border-[var(--enorsul-red)] bg-white shadow-xl shadow-red-950/10 dark:bg-slate-900"
+                      : "border-slate-200 bg-white/80 shadow-sm dark:border-slate-800 dark:bg-slate-900/80"
                   }`}
                 >
-                  {location.uf}
+                  <span className="text-sm font-black uppercase tracking-[0.2em] text-[var(--enorsul-red)]">{region.name}</span>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {region.clients.map((client) => (
+                      <span key={client} className="rounded bg-sky-50 px-3 py-2 text-sm font-black text-[var(--enorsul-blue)] dark:bg-slate-950 dark:text-[var(--enorsul-light-blue)]">
+                        {client}
+                      </span>
+                    ))}
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            <div className="relative rounded-lg border border-slate-200 bg-[linear-gradient(145deg,#ffffff,#e9f7ff)] p-5 shadow-xl shadow-slate-950/8 dark:border-slate-800 dark:bg-[linear-gradient(145deg,#08192a,#06111f)] md:p-8">
+              <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/85 px-5 py-3 text-center shadow-lg dark:bg-slate-950/85 md:block">
+                <p className="text-sm font-bold text-slate-500 dark:text-slate-300">Clientes</p>
+                <Image src="/logo/enorsul.svg" alt="Enorsul Saneamento" width={126} height={62} className="mt-1 h-auto w-[126px]" />
+              </div>
+              <svg viewBox={brazil.viewBox} role="img" aria-label="Mapa do Brasil com clientes e estados de atuacao da Enorsul" className="mx-auto aspect-square w-full max-w-[540px]">
+                <defs>
+                  <linearGradient id="mapActive" x1="0" x2="1">
+                    <stop offset="0%" stopColor="#E30613" />
+                    <stop offset="100%" stopColor="#B1000C" />
+                  </linearGradient>
+                  <linearGradient id="mapBase" x1="0" x2="1">
+                    <stop offset="0%" stopColor="#7CC3EA" />
+                    <stop offset="100%" stopColor="#1B78B5" />
+                  </linearGradient>
+                </defs>
+                {brazilStates.map((state) => {
+                  const location = stateById.get(state.id);
+                  const region = regionByState.get(state.id);
+                  const inActiveRegion = activeRegion.states.includes(state.id);
+                  const active = activeLocation.uf.toLowerCase() === state.id;
+                  const highlighted = activeStateIds.has(state.id);
+                  return (
+                    <path
+                      key={state.id}
+                      d={state.path}
+                      onMouseEnter={() => {
+                        if (location) setActiveLocation(location);
+                        if (region) setActiveRegion(region);
+                      }}
+                      onFocus={() => {
+                        if (location) setActiveLocation(location);
+                        if (region) setActiveRegion(region);
+                      }}
+                      tabIndex={location ? 0 : -1}
+                      className={`outline-none transition duration-200 ${location ? "cursor-pointer" : ""}`}
+                      fill={active ? "url(#mapActive)" : inActiveRegion ? "#4DB4E7" : highlighted ? "url(#mapBase)" : "rgba(148,163,184,.28)"}
+                      stroke={active || inActiveRegion ? "#ffffff" : "rgba(255,255,255,.9)"}
+                      strokeWidth={active ? 2.8 : inActiveRegion ? 2 : 1.1}
+                      opacity={highlighted || inActiveRegion || active ? 1 : 0.48}
+                    >
+                      <title>{location ? `${location.uf} - ${location.city}` : state.name}</title>
+                    </path>
+                  );
+                })}
+              </svg>
+
+              <div className="mt-5 grid gap-3 rounded-lg bg-white/80 p-4 dark:bg-slate-950/70 sm:grid-cols-[auto_1fr]">
+                <div className="flex items-center gap-2 text-sm font-black text-[var(--enorsul-red)]">
+                  <MapPin size={18} /> {activeRegion.name}
+                </div>
+                <p className="text-sm font-semibold leading-6 text-slate-600 dark:text-slate-300">{activeRegion.description}</p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {clientRegions.slice(2).map((region) => (
+                <button
+                  key={region.id}
+                  onClick={() => setActiveRegion(region)}
+                  className={`w-full rounded-lg border p-4 text-left transition hover:-translate-y-0.5 ${
+                    activeRegion.id === region.id
+                      ? "border-[var(--enorsul-red)] bg-white shadow-xl shadow-red-950/10 dark:bg-slate-900"
+                      : "border-slate-200 bg-white/80 shadow-sm dark:border-slate-800 dark:bg-slate-900/80"
+                  }`}
+                >
+                  <span className="text-sm font-black uppercase tracking-[0.2em] text-[var(--enorsul-red)]">{region.name}</span>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {region.clients.map((client) => (
+                      <span key={client} className="rounded bg-sky-50 px-3 py-2 text-sm font-black text-[var(--enorsul-blue)] dark:bg-slate-950 dark:text-[var(--enorsul-light-blue)]">
+                        {client}
+                      </span>
+                    ))}
+                  </div>
                 </button>
               ))}
             </div>
           </div>
-          <div className="rounded-lg border border-slate-200 bg-[linear-gradient(145deg,#ffffff,#eef7fd)] p-4 shadow-xl shadow-slate-950/8 dark:border-slate-800 dark:bg-[linear-gradient(145deg,#08192a,#06111f)] md:p-8">
-            <svg viewBox={brazil.viewBox} role="img" aria-label="Mapa do Brasil com estados de atuacao da Enorsul" className="mx-auto aspect-square w-full max-w-[560px]">
-              <defs>
-                <linearGradient id="mapActive" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#E30613" />
-                  <stop offset="100%" stopColor="#B1000C" />
-                </linearGradient>
-                <linearGradient id="mapBase" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#1B78B5" />
-                  <stop offset="100%" stopColor="#4DB4E7" />
-                </linearGradient>
-              </defs>
-              {brazilStates.map((state) => {
-                const location = stateById.get(state.id);
-                const active = activeLocation.uf.toLowerCase() === state.id;
-                const highlighted = activeStateIds.has(state.id);
-                return (
-                  <path
-                    key={state.id}
-                    d={state.path}
-                    onMouseEnter={() => location && setActiveLocation(location)}
-                    onFocus={() => location && setActiveLocation(location)}
-                    tabIndex={location ? 0 : -1}
-                    className={`outline-none transition duration-200 ${location ? "cursor-pointer" : ""}`}
-                    fill={active ? "url(#mapActive)" : highlighted ? "url(#mapBase)" : "rgba(148,163,184,.35)"}
-                    stroke={active ? "#7f0008" : "#ffffff"}
-                    strokeWidth={active ? 2.4 : 1.2}
-                    opacity={highlighted || active ? 1 : 0.55}
-                  >
-                    <title>{location ? `${location.uf} - ${location.city}` : state.name}</title>
-                  </path>
-                );
-              })}
-            </svg>
-            <div className="mt-3 flex items-center justify-center gap-5 text-xs font-bold text-slate-500 dark:text-slate-300">
-              <span className="inline-flex items-center gap-2"><span className="h-3 w-3 rounded-sm bg-[var(--enorsul-blue)]" /> Atuacao</span>
-              <span className="inline-flex items-center gap-2"><span className="h-3 w-3 rounded-sm bg-[var(--enorsul-red)]" /> Selecionado</span>
-            </div>
+
+          <div className="mt-6 rounded-lg border border-slate-200 bg-white/80 p-4 text-sm font-semibold text-slate-600 shadow-sm dark:border-slate-800 dark:bg-slate-900/80 dark:text-slate-300">
+            <strong className="text-slate-950 dark:text-white">{activeLocation.uf} - {activeLocation.city}:</strong> {activeLocation.work}
           </div>
         </div>
       </section>
