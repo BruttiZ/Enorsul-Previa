@@ -283,8 +283,8 @@ export default function HomePage() {
       <header className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${headerClass}`}>
         <div className="section-shell flex h-18 items-center justify-between gap-4 md:h-20">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Enorsul inicio">
-            <span className="inline-flex h-12 w-[122px] items-center md:h-14 md:w-[146px]">
-              <Image src="/logo/enorsul.svg" alt="Enorsul Saneamento" width={295} height={145} priority className="h-auto w-full" />
+            <span className="inline-flex h-12 w-[124px] items-center rounded bg-white px-1.5 md:h-14 md:w-[146px]">
+              <Image src="/logo/enorsul.png" alt="Enorsul Saneamento" width={376} height={145} priority className="h-full w-full object-contain" />
             </span>
           </a>
           <nav className="hidden min-w-0 flex-1 items-center justify-center gap-5 text-sm font-semibold lg:flex xl:gap-6">
@@ -560,7 +560,7 @@ export default function HomePage() {
             <div className="relative rounded-lg border border-slate-200 bg-[linear-gradient(145deg,#ffffff,#e9f7ff)] p-5 shadow-xl shadow-slate-950/8 dark:border-slate-800 dark:bg-[linear-gradient(145deg,#08192a,#06111f)] md:p-8">
               <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/85 px-5 py-3 text-center shadow-lg dark:bg-slate-950/85 md:block">
                 <p className="text-sm font-bold text-slate-500 dark:text-slate-300">Clientes</p>
-                <Image src="/logo/enorsul.svg" alt="Enorsul Saneamento" width={126} height={62} className="mt-1 h-auto w-[126px]" />
+                <Image src="/logo/enorsul.png" alt="Enorsul Saneamento" width={376} height={145} className="mt-1 h-auto w-[132px] object-contain" />
               </div>
               <svg viewBox={brazil.viewBox} role="img" aria-label="Mapa do Brasil com clientes e estados de atuacao da Enorsul" className="mx-auto aspect-square w-full max-w-[540px]">
                 <defs>
@@ -670,7 +670,7 @@ export default function HomePage() {
           <div className="grid gap-8 rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-xl shadow-slate-950/5 dark:border-slate-800 dark:bg-slate-900 md:p-8 lg:grid-cols-[1.1fr_.9fr]">
             <div>
               <span className="inline-flex w-[190px]">
-                <Image src="/logo/enorsul.svg" alt="Enorsul Saneamento" width={295} height={145} className="h-auto w-full" />
+                <Image src="/logo/enorsul.png" alt="Enorsul Saneamento" width={376} height={145} className="h-auto w-full object-contain" />
               </span>
               <h2 className="mt-7 max-w-2xl text-2xl font-black tracking-normal md:text-4xl">
                 Engenharia, operacao e inteligencia para saneamento em escala nacional.
