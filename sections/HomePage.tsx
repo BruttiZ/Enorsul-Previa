@@ -234,6 +234,14 @@ export default function HomePage() {
   const [activeLocation, setActiveLocation] = useState(locations[0]);
   const [activeRegion, setActiveRegion] = useState(clientRegions[2]);
 
+  const selectRegion = (region: typeof clientRegions[number]) => {
+    setActiveRegion(region);
+    const firstRegionLocation = locations.find((location) => region.states.includes(location.uf.toLowerCase()));
+    if (firstRegionLocation) {
+      setActiveLocation(firstRegionLocation);
+    }
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -530,7 +538,7 @@ export default function HomePage() {
               {clientRegions.slice(0, 2).map((region) => (
                 <button
                   key={region.id}
-                  onClick={() => setActiveRegion(region)}
+                  onClick={() => selectRegion(region)}
                   className={`w-full rounded-lg border p-4 text-left transition hover:-translate-y-0.5 ${
                     activeRegion.id === region.id
                       ? "border-[var(--enorsul-red)] bg-white shadow-xl shadow-red-950/10 dark:bg-slate-900"
@@ -585,7 +593,7 @@ export default function HomePage() {
                       }}
                       tabIndex={location ? 0 : -1}
                       className={`outline-none transition duration-200 ${location ? "cursor-pointer" : ""}`}
-                      fill={active ? "url(#mapActive)" : inActiveRegion ? "#4DB4E7" : highlighted ? "url(#mapBase)" : "rgba(148,163,184,.28)"}
+                      fill={active ? "#B1000C" : inActiveRegion ? "url(#mapActive)" : highlighted ? "url(#mapBase)" : "rgba(148,163,184,.28)"}
                       stroke={active || inActiveRegion ? "#ffffff" : "rgba(255,255,255,.9)"}
                       strokeWidth={active ? 2.8 : inActiveRegion ? 2 : 1.1}
                       opacity={highlighted || inActiveRegion || active ? 1 : 0.48}
@@ -608,7 +616,7 @@ export default function HomePage() {
               {clientRegions.slice(2).map((region) => (
                 <button
                   key={region.id}
-                  onClick={() => setActiveRegion(region)}
+                  onClick={() => selectRegion(region)}
                   className={`w-full rounded-lg border p-4 text-left transition hover:-translate-y-0.5 ${
                     activeRegion.id === region.id
                       ? "border-[var(--enorsul-red)] bg-white shadow-xl shadow-red-950/10 dark:bg-slate-900"
