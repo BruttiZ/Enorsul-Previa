@@ -235,8 +235,8 @@ export default function HomePage() {
       <header className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${headerClass}`}>
         <div className="section-shell flex h-18 items-center justify-between gap-4 md:h-20">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Enorsul inicio">
-            <span className="inline-flex h-12 w-[118px] items-center rounded bg-white px-2 shadow-sm md:h-14 md:w-[138px]">
-              <Image src="/logo/enorsul.png" alt="Enorsul Saneamento" width={295} height={145} priority className="h-auto w-full" />
+            <span className="inline-flex h-12 w-[122px] items-center md:h-14 md:w-[146px]">
+              <Image src="/logo/enorsul.svg" alt="Enorsul Saneamento" width={295} height={145} priority className="h-auto w-full" />
             </span>
           </a>
           <nav className="hidden min-w-0 flex-1 items-center justify-center gap-5 text-sm font-semibold lg:flex xl:gap-6">
@@ -577,8 +577,8 @@ export default function HomePage() {
         <div className="section-shell py-14 md:py-18">
           <div className="grid gap-8 rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-xl shadow-slate-950/5 dark:border-slate-800 dark:bg-slate-900 md:p-8 lg:grid-cols-[1.1fr_.9fr]">
             <div>
-              <span className="inline-flex w-[170px] rounded bg-white p-2 shadow-sm">
-                <Image src="/logo/enorsul.png" alt="Enorsul Saneamento" width={295} height={145} className="h-auto w-full" />
+              <span className="inline-flex w-[190px]">
+                <Image src="/logo/enorsul.svg" alt="Enorsul Saneamento" width={295} height={145} className="h-auto w-full" />
               </span>
               <h2 className="mt-7 max-w-2xl text-2xl font-black tracking-normal md:text-4xl">
                 Engenharia, operacao e inteligencia para saneamento em escala nacional.
